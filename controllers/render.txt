@@ -1,0 +1,15 @@
+ejs ---rendering template which is called embedded javascript 
+
+handlebars 
+app.get("/test" , async(res,res)=>{
+    const url  = await urls.find({})
+    return res.end(
+    <html>
+    
+    </html>
+    
+    
+    )
+})
+
+
