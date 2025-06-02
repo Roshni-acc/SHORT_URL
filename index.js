@@ -23,7 +23,7 @@ app.use(checkforauth)
 
 
 // to restrict 
-app.use("url", restrictTo("NORMAL"),urlRoute)
+app.use("/url", restrictTo("NORMAL"),urlRoute)
 app.use("/", checkforauth , static)
 app.use('/user', userRoute);
 
@@ -33,8 +33,9 @@ connectDB("mongodb://localhost:27017/user")
 
 // get route to redirect to that url 
 app.get('/:shortid', async (req,res)=>{
+     console.log("Received shortid:", shortid);  // ✅
     const shortid = req.params.shortid;
-    // console.log("Requested shortId" , shortid)
+ 
 const entry = await URL.findOneAndUpdate(
 {
     shortid,
