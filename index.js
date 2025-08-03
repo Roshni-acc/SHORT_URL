@@ -8,6 +8,7 @@ const cookie = require ("cookie-parser")
 const urlRoute = require("./router/url");
 const { connectDB } = require ("./connect")
 const URL = require("./models/url");
+const User = require("./models/user");
 const userRoute = require("./router/user")
 const static = require("./router/staticrouter");
 const {restrictUser,checkAuth,
@@ -56,7 +57,18 @@ VisitHistory: {
     res.redirect(entry.redirect);
 })
 
+app.post('/login', async (req, res) => {
+    const { email, password } = req.body;
 
+    const user = await User.findOne({ email });
+
+    if (!user || user.password !== password) {
+        return res.status(401).send("Invalid credentials");
+    }
+
+    // You can set a cookie or session here if needed
+    res.send("Login successful");
+});
 
 
 // app.use("url" , urlRoute);
