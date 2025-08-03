@@ -32,9 +32,9 @@ connectDB("mongodb://localhost:27017/user")
 .then(()=> console.log("COnnected to MongoDB"));
 
 // get route to redirect to that url 
-app.get('/:shortid', async (req,res)=>{
-     console.log("Received shortid:", shortid);  // ✅
+app.get('/:shortid', async (req,res)=>{ 
     const shortid = req.params.shortid;
+    console.log("Received shortid:", shortid); 
  
 const entry = await URL.findOneAndUpdate(
 {
