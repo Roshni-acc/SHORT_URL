@@ -10,7 +10,7 @@ await User.create({
    password
 });
 // return res.render("home");
-return res.redirect("/");
+return res.redirect("/login");
 
 }
 
