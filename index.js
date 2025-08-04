@@ -54,7 +54,7 @@ VisitHistory: {
     if (!entry){
         return res.status(404).send('short URL not found')
     }
-    res.redirect(entry.redirect);
+    res.redirect(entry.redirectURL);
 })
 
 app.post('/login', async (req, res) => {
