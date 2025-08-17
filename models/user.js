@@ -19,12 +19,12 @@ const schema =  new mongoose.Schema (
         },
         password :{
             type:String,
-            requuired : true , 
+            required : true , 
         },
 
     },
     {
-        timestamp: true 
+        timestamps: true 
     }
 
 

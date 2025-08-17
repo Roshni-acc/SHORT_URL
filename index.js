@@ -44,7 +44,7 @@ const entry = await URL.findOneAndUpdate(
 {
     $push:{
 VisitHistory: {
-    timestamp: Date.now(),
+    timestamps: Date.now(),
 },
     },
 },
