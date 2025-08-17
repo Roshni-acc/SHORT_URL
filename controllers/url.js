@@ -4,14 +4,14 @@ const URL  = require('../models/url');
 
 async function handlegenerateURL (req,res){
     const body = req.body ;
-    if(!body.url) return res.status(400).json({err :"Error occured" });
+    if(!body.url) return res.status(400).json({err :"Error occured t" });
 
-    const shortid = nanoid();
+    const shortid = nanoid(8);
 await URL.create({
     shortid: shortid,
     redirectURL : body.url,
     VisitHistory:[],
-    createBy:  req.user.id,
+     createdBy: req.user ? req.user._id : null, // safe check
 
 });
 
