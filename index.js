@@ -32,6 +32,9 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookie());
 
+app.use(express.static("public"));
+
+
 // ---------------- Public Routes (no auth required) ----------------
 app.use("/user", userRoute);          // register, login routes
 app.use("/", staticRoute);            // static pages like home, about, etc.

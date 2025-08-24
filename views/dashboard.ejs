@@ -4,72 +4,47 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Dashboard</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      margin: 20px;
-    }
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      margin-top: 20px;
-    }
-    th, td {
-      border: 1px solid #ddd;
-      padding: 8px;
-      text-align: center;
-    }
-    th {
-      background-color: #f4f4f4;
-    }
-    input[type="text"] {
-      padding: 8px;
-      width: 300px;
-    }
-    button {
-      padding: 8px 15px;
-      cursor: pointer;
-    }
-  </style>
+<link rel="stylesheet" href="/style.css">
 </head>
 <body>
-  <h1>Dashboard</h1>
+  <div class="container">
+    <h1>Dashboard</h1>
 
-  <!-- Form to create new short URL -->
-  <form method="POST" action="/url">
-    <label for="redirectURL">Enter Original URL:</label>
-    <input type="text" id="url" name="url" required placeholder="https://example.com" />
-    <button type="submit">Generate Short URL</button>
-  </form>
+    <!-- Form to create new short URL -->
+    <form method="POST" action="/url">
+      <label for="redirectURL">Enter Original URL:</label>
+      <input type="text" id="url" name="url" required placeholder="https://example.com" />
+      <button type="submit">Generate Short URL</button>
+    </form>
 
-  <!-- Table of short URLs -->
-  <table>
-    <thead>
-      <tr>
-        <th>Count</th>
-        <th>Short URL ID</th>
-        <th>Original URL</th>
-        <th>Visit Link</th>
-      </tr>
-    </thead>
-    <tbody>
-      <% if (urls && urls.length > 0) { %>
-        <% urls.forEach((url, index) => { %>
-          <tr>
-            <td><%= index + 1 %></td>
-            <td><%= url.shortID %></td>
-            <td><%= url.redirectURL %></td>
-            <td>
-              <a href="/u/<%= url.shortID %>" target="_blank">Visit</a>
-            </td>
-          </tr>
-        <% }) %>
-      <% } else { %>
+    <!-- Table of short URLs -->
+    <table>
+      <thead>
         <tr>
-          <td colspan="4">No URLs created yet</td>
+          <th>#</th>
+          <th>Short URL</th>
+          <th>Original URL</th>
+          <th>Visit</th>
         </tr>
-      <% } %>
-    </tbody>
-  </table>
-</body>
+      </thead>
+      <tbody>
+        <% if (urls && urls.length > 0) { %>
+          <% urls.forEach((url, index) => { %>
+            <tr>
+              <td><%= index + 1 %></td>
+              <td><%= url.shortID %></td>
+              <td><%= url.redirectURL %></td>
+              <td>
+                <a href="/u/<%= url.shortID %>" target="_blank">Visit</a>
+              </td>
+            </tr>
+          <% }) %>
+        <% } else { %>
+          <tr>
+            <td colspan="4">No URLs created yet</td>
+          </tr>
+        <% } %>
+      </tbody>
+    </table>
+  </div>
 </html>
