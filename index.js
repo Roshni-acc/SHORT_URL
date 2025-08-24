@@ -36,22 +36,16 @@ app.use(cookie());
 app.use("/user", userRoute);          // register, login routes
 app.use("/", staticRoute);            // static pages like home, about, etc.
 
-// ---------------- Protected Routes (auth required) ----------------
-app.use(checkforauth);                // apply authentication middleware after public routes
-
-app.use("/url", restrictTo("NORMAL"), urlRoute);
-app.use("/dashboard", dashboardRoute);
-
 // ---------------- Short URL redirect route ----------------
-app.get('/:shortid', async (req, res) => {
+app.get('/u/:shortid', async (req, res) => {
   const shortid = req.params.shortid;
   console.log("Received shortid:", shortid);
 
   const entry = await URL.findOneAndUpdate(
-    { shortid },
+    { shortID: shortid },
     {
       $push: {
-        VisitHistory: { timestamps: Date.now() },
+        VisitHistory: { timestamp: Date.now() },
       },
     },
     { new: true }
@@ -62,6 +56,14 @@ app.get('/:shortid', async (req, res) => {
   }
   res.redirect(entry.redirectURL);
 });
+
+
+// ---------------- Protected Routes (auth required) ----------------
+app.use(checkforauth);                // apply authentication middleware after public routes
+
+app.use("/url", restrictTo("NORMAL"), urlRoute);
+app.use("/dashboard", dashboardRoute);
+
 
 // ---------------- Login route (basic) ----------------
 app.post('/login', async (req, res) => {
