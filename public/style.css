@@ -1,4 +1,4 @@
-body {
+/* body {
   font-family: Arial, sans-serif;
   background: linear-gradient(to right, #2193b0, #6dd5ed);
   color: white;
@@ -34,4 +34,131 @@ button {
 }
 button:hover {
   background-color: #17627a;
+} */
+
+
+
+
+/* General Page Styling */
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 20px;
+  background: #f4f4f9;
+}
+
+/* Dashboard container */
+.dashboard {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Headings */
+h2 {
+  text-align: center;
+  margin-bottom: 20px;
+  font-size: 1.8rem;
+  color: #333;
+}
+
+/* Responsive table */
+
+
+/* styles.css */
+td {
+  padding: 12px 15px;
+  border: 1px solid #ddd;
+  text-align: center;
+  font-size: 1rem;
+  word-break: break-word;       /* breaks long words */
+  max-width: 300px;             /* restrict cell width */
+  overflow: hidden;             /* hide extra content */
+  text-overflow: ellipsis;      /* show "..." */
+  white-space: normal;          /* allow wrapping */
+}
+
+/* If you want clickable full URL on hover */
+td a {
+  color: #007bff;
+  text-decoration: none;
+  word-break: break-all;
+}
+
+td a:hover {
+  text-decoration: underline;
+}
+
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+  overflow-x: auto;
+  display: block; /* important for small screens */
+}
+
+
+
+
+th, td {
+  padding: 12px 15px;
+  border: 1px solid #ddd;
+  text-align: center;
+  font-size: 1rem;
+}
+
+th {
+  background: #007bff;
+  color: #fff;
+  text-transform: uppercase;
+  font-size: 0.9rem;
+}
+
+/* Row hover */
+tr:nth-child(even) {
+  background: #f9f9f9;
+}
+
+tr:hover {
+  background: #f1f1f1;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+  body {
+    padding: 10px;
+  }
+
+  .dashboard {
+    padding: 15px;
+  }
+
+  table, th, td {
+    font-size: 0.9rem;
+  }
+
+  h2 {
+    font-size: 1.4rem;
+  }
+}
+
+@media (max-width: 480px) {
+  table {
+    display: block;
+    overflow-x: auto;
+    white-space: nowrap; /* keeps table readable */
+  }
+
+  th, td {
+    padding: 8px 10px;
+    font-size: 0.8rem;
+  }
+
+  h2 {
+    font-size: 1.2rem;
+  }
 }
