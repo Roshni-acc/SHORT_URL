@@ -1,26 +1,122 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Signup</title>
-<link rel="stylesheet" href="/style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <style>
+    /* Background */
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: linear-gradient(135deg, #7b2ff7, #f107a3);
+    }
+
+    /* Centered black popup */
+    .container {
+      background: #111;
+      padding: 40px;
+      border-radius: 12px;
+      width: 350px;
+      box-shadow: 0px 8px 20px rgba(0,0,0,0.6);
+      text-align: center;
+    }
+
+    .container h1 {
+      color: #fff;
+      margin-bottom: 25px;
+      font-size: 28px;
+    }
+
+    /* Labels */
+    label {
+      display: block;
+      color: #bbb;
+      font-size: 14px;
+      margin: 12px 0 5px;
+      text-align: left;
+    }
+
+    /* Inputs */
+    input {
+      width: 100%;
+      padding: 12px;
+      border-radius: 6px;
+      border: none;
+      outline: none;
+      margin-bottom: 18px;
+      background: #222;
+      color: #fff;
+      font-size: 14px;
+    }
+
+    /* Password wrapper for eye icon */
+    .password-wrapper {
+      position: relative;
+    }
+    .password-wrapper input {
+      padding-right: 40px;
+    }
+    .password-wrapper .toggle-password {
+      position: absolute;
+      right: 12px;
+      top: 50%;
+      transform: translateY(-50%);
+      cursor: pointer;
+      color: #aaa;
+    }
+
+    /* Button */
+    button {
+      width: 100%;
+      padding: 12px;
+      border: none;
+      border-radius: 6px;
+      background: linear-gradient(135deg, #7b2ff7, #f107a3);
+      color: white;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    button:hover {
+      opacity: 0.9;
+    }
+  </style>
 </head>
 <body>
   <div class="container">
-    <h1>Signup</h1>  
-    <form action="/user" method="POST">
-      <label>Full Name</label>
-      <input type="text" required name="name" placeholder="Your Name" />
-
+    <h1>Login</h1>
+    <form method="POST" action="/user/login">
       <label>Email</label>
-      <input type="email" required name="email" placeholder="example@mail.com" />
+      <input type="email" required name="email" placeholder="Enter email" />
 
       <label>Password</label>
-      <input type="password" required name="password" placeholder="Enter password" />
+      <div class="password-wrapper">
+        <input type="password" required name="password" placeholder="Enter password" id="password"/>
+        <i class="fa-solid fa-eye toggle-password" id="togglePassword"></i>
+      </div>
 
-      <button type="submit">Signup</button>
+      <button type="submit">Login</button>
     </form>
   </div>
+
+  <script>
+    const togglePassword = document.getElementById("togglePassword");
+    const password = document.getElementById("password");
+
+    togglePassword.addEventListener("click", () => {
+      const type = password.type === "password" ? "text" : "password";
+      password.type = type;
+      togglePassword.classList.toggle("fa-eye");
+      togglePassword.classList.toggle("fa-eye-slash");
+    });
+  </script>
 </body>
 </html>
