@@ -4,116 +4,19 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Login</title>
-  <style>
-    /* Full page background */
-    body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      background: purple; /* purple background */
-      height: 100vh;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-    }
-
-    /* Black popup container */
-    .container {
-      background: #111;
-      padding: 30px;
-      border-radius: 12px;
-      box-shadow: 0 0 20px rgba(0,0,0,0.5);
-      width: 320px;
-      color: #fff;
-      text-align: center;
-    }
-
-    h1 {
-      margin-bottom: 20px;
-      color: #fff;
-    }
-
-    label {
-      display: block;
-      text-align: left;
-      margin: 12px 0 6px;
-      font-size: 14px;
-    }
-
-    input {
-  width: 100%;
-  padding: 10px 38px 10px 10px; /* leave space for eye */
-  border-radius: 8px;
-  border: none;
-  outline: none;
-  margin-bottom: 15px;
-  font-size: 14px;
-  background: #222;
-  color: #fff;
-  box-sizing: border-box; /* ✅ Fix overflowing inputs */
-}
-
-
-    /* Password field wrapper */
-    .password-wrapper {
-      position: relative;
-      width: 100%;
-    }
-
-    .password-wrapper input {
-      margin-bottom: 0;
-    }
-
-    /* Eye icon */
-    .toggle-eye {
-      position: absolute;
-      right: 10px;
-      top: 50%;
-      transform: translateY(-50%);
-      cursor: pointer;
-      font-size: 18px;
-      color: #888;
-    }
-
-    .toggle-eye:hover {
-      color: #fff;
-    }
-
-    button {
-      width: 100%;
-      padding: 12px;
-      border: none;
-      border-radius: 8px;
-      background: #6a11cb;
-      color: #fff;
-      font-size: 16px;
-      cursor: pointer;
-      transition: 0.3s;
-      margin-top: 18px;
-    }
-
-    button:hover {
-      background: #2575fc;
-    }
-
-    .signup-text {
-      margin-top: 15px;
-      font-size: 14px;
-      color: #aaa;
-    }
-
-    .signup-text a {
-      color: #6a11cb;
-      text-decoration: none;
-    }
-
-    .signup-text a:hover {
-      text-decoration: underline;
-    }
-  </style>
+  <link rel="stylesheet" href="/style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 </head>
 <body>
   <div class="container">
     <h1>Login</h1>
+
+    <% if (locals.error) { %>
+      <div class="error-msg">
+        <%= error %>
+      </div>
+    <% } %>
+
     <form method="POST" action="/user/login">
       <label>Email</label>
       <input type="email" required name="email" placeholder="Enter email" />
@@ -121,12 +24,12 @@
       <label>Password</label>
       <div class="password-wrapper">
         <input type="password" required name="password" placeholder="Enter password" id="password" />
-        <span class="toggle-eye" onclick="togglePassword()">👁️</span>
+        <i class="fa-solid fa-eye toggle-eye" onclick="togglePassword()"></i>
       </div>
 
       <button type="submit">Login</button>
     </form>
-    <div class="signup-text">
+    <div style="margin-top: 15px; font-size: 14px; color: #666;">
       Don’t have an account? <a href="/signup">Sign Up</a>
     </div>
   </div>
@@ -134,10 +37,15 @@
   <script>
     function togglePassword() {
       const passwordInput = document.getElementById("password");
+      const icon = document.querySelector(".toggle-eye");
       if (passwordInput.type === "password") {
         passwordInput.type = "text";
+        icon.classList.remove("fa-eye");
+        icon.classList.add("fa-eye-slash");
       } else {
         passwordInput.type = "password";
+        icon.classList.remove("fa-eye-slash");
+        icon.classList.add("fa-eye");
       }
     }
   </script>

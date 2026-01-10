@@ -23,7 +23,7 @@
 //         return res.render("login", {
 //             error:"Invalid Username or Password",
 //         });
-     
+
 //     }
 //          const token  = setUser(user);
 //         // res.cookie  ("uid", token,{
@@ -32,7 +32,7 @@
 //         res.cookie("token" , token);
 //         // return res.json({token});
 //         return res.redirect("/dashboard");
-    
+
 //     }catch(err){
 //      res.status(500).json({ message: "Server error isue " });
 //     }
@@ -51,6 +51,28 @@ const { setUser } = require("../service/auth");
 
 async function handleUserfunction(req, res) {
     const { name, email, password } = req.body;
+
+    // Basic Validation
+    if (!name || !email || !password) {
+        return res.render("signup", {
+            error: "All fields are required!"
+        });
+    }
+
+    if (password.length < 8) {
+        return res.render("signup", {
+            error: "Password must be at least 8 characters long."
+        });
+    }
+
+    // Check for duplicate user
+    const existingUser = await User.findOne({ email });
+    if (existingUser) {
+        return res.render("signup", {
+            error: "Email already exists. Please login."
+        });
+    }
+
     await User.create({
         name,
         email,
@@ -76,7 +98,6 @@ async function handleLogin(req, res) {
         // Store token in cookie
         res.cookie("token", token);
 
-        // ✅ Fixed this line
         return res.redirect("/dashboard");
 
     } catch (err) {
@@ -85,7 +106,13 @@ async function handleLogin(req, res) {
     }
 }
 
+async function handleLogout(req, res) {
+    res.clearCookie("token");
+    res.redirect("/login");
+}
+
 module.exports = {
     handleUserfunction,
     handleLogin,
+    handleLogout
 };

@@ -1,20 +1,28 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Dashboard</title>
-<link rel="stylesheet" href="/style.css">
+  <link rel="stylesheet" href="/style.css">
 </head>
-<body>
-  <div class="container">
-    <h1>Dashboard</h1>
+
+<body class="dashboard-page">
+  <div class="container dashboard-container">
+    <div class="header">
+      <h1>Dashboard</h1>
+      <a href="/user/logout" class="button logout-btn"
+        style="text-decoration: none; display: inline-block; text-align: center; color: white; border-radius:8px;">Logout</a>
+    </div>
 
     <!-- Form to create new short URL -->
-    <form method="POST" action="/url">
+    <form method="POST" action="/url" style="margin-bottom: 30px;">
       <label for="redirectURL">Enter Original URL:</label>
-      <input type="text" id="url" name="url" required placeholder="https://example.com" />
-      <button type="submit">Generate Short URL</button>
+      <div style="display: flex; gap: 10px;">
+        <input type="text" id="url" name="url" required placeholder="https://example.com" style="flex:1;" />
+        <button type="submit" style="width: auto; margin-top: 0;">Generate Short URL</button>
+      </div>
     </form>
 
     <!-- Table of short URLs -->
@@ -28,23 +36,31 @@
         </tr>
       </thead>
       <tbody>
-        <% if (urls && urls.length > 0) { %>
-          <% urls.forEach((url, index) => { %>
+        <% if (urls && urls.length> 0) { %>
+          <% urls.forEach((url, index)=> { %>
             <tr>
-              <td><%= index + 1 %></td>
-              <td><%= url.shortID %></td>
-              <td><%= url.redirectURL %></td>
+              <td>
+                <%= index + 1 %>
+              </td>
+              <td>
+                <%= url.shortID %>
+              </td>
+              <td>
+                <%= url.redirectURL %>
+              </td>
               <td>
                 <a href="/u/<%= url.shortID %>" target="_blank">Visit</a>
               </td>
             </tr>
-          <% }) %>
-        <% } else { %>
-          <tr>
-            <td colspan="4">No URLs created yet</td>
-          </tr>
-        <% } %>
+            <% }) %>
+              <% } else { %>
+                <tr>
+                  <td colspan="4" style="text-align: center;">No URLs created yet</td>
+                </tr>
+                <% } %>
       </tbody>
     </table>
   </div>
+</body>
+
 </html>

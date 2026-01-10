@@ -1,164 +1,194 @@
-/* body {
-  font-family: Arial, sans-serif;
-  background: linear-gradient(to right, #2193b0, #6dd5ed);
-  color: white;
-  margin: 0;
-  padding: 0;
-  text-align: center;
-}
-h1 {
-  margin-top: 20px;
-}
-table {
-  margin: 20px auto;
-  border-collapse: collapse;
-  width: 80%;
-  background: white;
-  color: black;
-}
-th, td {
-  border: 1px solid #ddd;
-  padding: 10px;
-}
-th {
-  background-color: #2193b0;
-  color: white;
-}
-button {
-  padding: 10px 15px;
-  background-color: #2193b0;
-  color: white;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-}
-button:hover {
-  background-color: #17627a;
-} */
-
-
-
-
-/* General Page Styling */
+/* Global Styles */
 body {
-  font-family: Arial, sans-serif;
   margin: 0;
-  padding: 20px;
-  background: #f4f4f9;
-}
-
-/* Dashboard container */
-.dashboard {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 20px;
-  background: #fff;
-  border-radius: 8px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-}
-
-/* Headings */
-h2 {
-  text-align: center;
-  margin-bottom: 20px;
-  font-size: 1.8rem;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: linear-gradient(135deg, #1f4037, #99f2c8); /* Deep green/teal gradient */
+  background-attachment: fixed; /* fix background on scroll */
   color: #333;
+  display: flex;
+  justify-content: center;
+  align-items: center; /* Centers login/signup, overridden for dashboard */
+  min-height: 100vh;
 }
 
-/* Responsive table */
-
-
-/* styles.css */
-td {
-  padding: 12px 15px;
-  border: 1px solid #ddd;
-  text-align: center;
-  font-size: 1rem;
-  word-break: break-word;       /* breaks long words */
-  max-width: 300px;             /* restrict cell width */
-  overflow: hidden;             /* hide extra content */
-  text-overflow: ellipsis;      /* show "..." */
-  white-space: normal;          /* allow wrapping */
+/* For pages that need top alignment (Dashboard) */
+body.dashboard-page {
+  align-items: flex-start;
+  padding-top: 50px;
 }
 
-/* If you want clickable full URL on hover */
-td a {
-  color: #007bff;
+/* Links */
+a {
+  color: #1f4037;
   text-decoration: none;
-  word-break: break-all;
+  font-weight: bold;
 }
-
-td a:hover {
+a:hover {
   text-decoration: underline;
 }
 
+/* Containers (Login, Signup, Dashboard Card) */
+.container {
+  background: rgba(255, 255, 255, 0.95); /* Glass-ish white */
+  padding: 40px;
+  border-radius: 15px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  width: 100%;
+  max-width: 400px; /* Default for auth forms */
+  text-align: center;
+}
 
+/* Dashboard specific container override */
+.container.dashboard-container {
+  max-width: 900px;
+  text-align: left;
+}
+
+/* Headings */
+h1, h2 {
+  margin-bottom: 25px;
+  color: #1f4037;
+  font-weight: 700;
+}
+
+/* Form Elements */
+label {
+  display: block;
+  text-align: left;
+  margin: 15px 0 5px;
+  color: #555;
+  font-weight: 600;
+  font-size: 0.95rem;
+}
+
+input {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  box-sizing: border-box;
+  font-size: 1rem;
+  background: #f9f9f9;
+  transition: 0.3s;
+}
+
+input:focus {
+  border-color: #1f4037;
+  outline: none;
+  background: #fff;
+  box-shadow: 0 0 0 3px rgba(31, 64, 55, 0.1);
+}
+
+/* Password Wrapper */
+.password-wrapper {
+  position: relative;
+}
+.password-wrapper input {
+  padding-right: 40px;
+}
+.toggle-eye {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  cursor: pointer;
+  color: #888;
+}
+
+/* Buttons */
+button {
+  width: 100%;
+  padding: 14px;
+  margin-top: 20px;
+  border: none;
+  border-radius: 8px;
+  background: linear-gradient(135deg, #1f4037, #99f2c8);
+  color: #fff; /* Text is white */
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+  text-shadow: 0 1px 2px rgba(0,0,0,0.2); /* Slight text shadow for readability */
+}
+
+button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(31, 64, 55, 0.3);
+  opacity: 0.95;
+}
+
+/* Error Messages */
+.error-msg {
+  background: #ffebee;
+  color: #c62828;
+  padding: 10px;
+  border-radius: 6px;
+  margin-bottom: 15px;
+  border: 1px solid #ef9a9a;
+  font-size: 0.9rem;
+}
+
+/* Dashboard Header with Logout */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 30px;
+  border-bottom: 2px solid #eee;
+  padding-bottom: 10px;
+}
+
+.logout-btn {
+  background: #ef5350; /* Red for logout */
+  width: auto;
+  padding: 8px 16px;
+  margin: 0;
+  font-size: 0.9rem;
+}
+.logout-btn:hover {
+  background: #d32f2f;
+}
+
+/* Table Styling (Colorful "Chat" feel) */
 table {
   width: 100%;
   border-collapse: collapse;
   margin-top: 20px;
-  overflow-x: auto;
-  display: block; /* important for small screens */
+  background: white;
+  overflow: hidden;
+  border-radius: 8px;
 }
 
-
-
+thead {
+  background: #1f4037;
+  color: white;
+}
 
 th, td {
-  padding: 12px 15px;
-  border: 1px solid #ddd;
-  text-align: center;
-  font-size: 1rem;
+  padding: 15px;
+  text-align: left;
+  border-bottom: 1px solid #eee;
 }
 
 th {
-  background: #007bff;
-  color: #fff;
   text-transform: uppercase;
-  font-size: 0.9rem;
-}
-
-/* Row hover */
-tr:nth-child(even) {
-  background: #f9f9f9;
+  font-size: 0.85rem;
+  letter-spacing: 0.05em;
 }
 
 tr:hover {
-  background: #f1f1f1;
+  background-color: #f1f8e9; /* Light green hover */
 }
 
-/* Responsive Adjustments */
-@media (max-width: 768px) {
-  body {
-    padding: 10px;
-  }
-
-  .dashboard {
-    padding: 15px;
-  }
-
-  table, th, td {
-    font-size: 0.9rem;
-  }
-
-  h2 {
-    font-size: 1.4rem;
-  }
+/* Short URL Link */
+td a {
+  color: #00796b;
 }
 
-@media (max-width: 480px) {
-  table {
-    display: block;
-    overflow-x: auto;
-    white-space: nowrap; /* keeps table readable */
-  }
-
-  th, td {
-    padding: 8px 10px;
-    font-size: 0.8rem;
-  }
-
-  h2 {
-    font-size: 1.2rem;
+/* Responsive */
+@media (max-width: 600px) {
+  .container {
+    padding: 20px;
+    width: 90%;
   }
 }

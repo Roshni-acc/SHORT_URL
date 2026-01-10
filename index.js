@@ -1,7 +1,7 @@
-
+require('dotenv').config();
 const express = require('express');
 const app = express();
-const PORT = 8001;
+// PORT is now defined at the bottom with process.env
 const path = require("path");
 const cookie = require("cookie-parser");
 
@@ -83,7 +83,12 @@ app.post('/login', async (req, res) => {
 });
 
 // ---------------- Connect DB and start server ----------------
-connectDB("mongodb://localhost:27017/user")
-  .then(() => console.log("Connected to MongoDB"));
+// Use environment variables for deployment, fallback to local for development
+const PORT = process.env.PORT || 8001;
+const MONGO_URL = process.env.MONGO_URL || "mongodb://localhost:27017/user";
+
+connectDB(MONGO_URL)
+  .then(() => console.log(`Connected to MongoDB at ${MONGO_URL}`))
+  .catch(err => console.error("MongoDB connection error:", err));
 
 app.listen(PORT, () => console.log(`Server started successfully on PORT ${PORT}`));
