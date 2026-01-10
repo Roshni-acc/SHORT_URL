@@ -50,18 +50,33 @@ const User = require('../models/user');
 const { setUser } = require("../service/auth");
 
 async function handleUserfunction(req, res) {
-    const { name, email, password } = req.body;
+    const { name, email, password, confirmPassword } = req.body;
 
     // Basic Validation
-    if (!name || !email || !password) {
+    if (!name || !email || !password || !confirmPassword) {
         return res.render("signup", {
             error: "All fields are required!"
+        });
+    }
+
+    // Password Validation
+    if (password !== confirmPassword) {
+        return res.render("signup", {
+            error: "Passwords do not match."
         });
     }
 
     if (password.length < 8) {
         return res.render("signup", {
             error: "Password must be at least 8 characters long."
+        });
+    }
+
+    // Email Validation (Regex)
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email)) {
+        return res.render("signup", {
+            error: "Invalid email format."
         });
     }
 
@@ -76,7 +91,7 @@ async function handleUserfunction(req, res) {
     await User.create({
         name,
         email,
-        password
+        password // Note: Still storing plaintext as per instructions, but validation is improved.
     });
     // After registration → go to login page
     return res.redirect("/login");

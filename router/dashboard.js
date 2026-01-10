@@ -10,7 +10,7 @@ router.get("/", async (req, res) => {
       return res.redirect("/login");
     }
 
-    const urls = await URL.find({}); // fetch all shortened URLs
+    const urls = await URL.find({ createdBy: user._id }); // fetch ONLY user's URLs
 
     return res.render("dashboard", { urls });
   } catch (err) {

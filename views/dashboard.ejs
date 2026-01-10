@@ -39,17 +39,17 @@
         <% if (urls && urls.length> 0) { %>
           <% urls.forEach((url, index)=> { %>
             <tr>
-              <td>
+              <td data-label="#">
                 <%= index + 1 %>
               </td>
-              <td>
+              <td data-label="Short ID">
                 <%= url.shortID %>
               </td>
-              <td>
+              <td data-label="Original URL">
                 <%= url.redirectURL %>
               </td>
-              <td>
-                <a href="/u/<%= url.shortID %>" target="_blank">Visit</a>
+              <td data-label="Action">
+                <a href="/u/<%= url.shortID %>" target="_blank" class="visit-btn">Visit</a>
               </td>
             </tr>
             <% }) %>

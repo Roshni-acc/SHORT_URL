@@ -2,12 +2,15 @@
 body {
   margin: 0;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  background: linear-gradient(135deg, #1f4037, #99f2c8); /* Deep green/teal gradient */
-  background-attachment: fixed; /* fix background on scroll */
+  background: linear-gradient(135deg, #1f4037, #99f2c8);
+  /* Deep green/teal gradient */
+  background-attachment: fixed;
+  /* fix background on scroll */
   color: #333;
   display: flex;
   justify-content: center;
-  align-items: center; /* Centers login/signup, overridden for dashboard */
+  align-items: center;
+  /* Centers login/signup, overridden for dashboard */
   min-height: 100vh;
 }
 
@@ -23,18 +26,21 @@ a {
   text-decoration: none;
   font-weight: bold;
 }
+
 a:hover {
   text-decoration: underline;
 }
 
 /* Containers (Login, Signup, Dashboard Card) */
 .container {
-  background: rgba(255, 255, 255, 0.95); /* Glass-ish white */
+  background: rgba(255, 255, 255, 0.95);
+  /* Glass-ish white */
   padding: 40px;
   border-radius: 15px;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
   width: 100%;
-  max-width: 400px; /* Default for auth forms */
+  max-width: 400px;
+  /* Default for auth forms */
   text-align: center;
 }
 
@@ -45,7 +51,8 @@ a:hover {
 }
 
 /* Headings */
-h1, h2 {
+h1,
+h2 {
   margin-bottom: 25px;
   color: #1f4037;
   font-weight: 700;
@@ -83,9 +90,11 @@ input:focus {
 .password-wrapper {
   position: relative;
 }
+
 .password-wrapper input {
   padding-right: 40px;
 }
+
 .toggle-eye {
   position: absolute;
   right: 12px;
@@ -103,12 +112,14 @@ button {
   border: none;
   border-radius: 8px;
   background: linear-gradient(135deg, #1f4037, #99f2c8);
-  color: #fff; /* Text is white */
+  color: #fff;
+  /* Text is white */
   font-size: 1rem;
   font-weight: bold;
   cursor: pointer;
   transition: transform 0.2s, box-shadow 0.2s;
-  text-shadow: 0 1px 2px rgba(0,0,0,0.2); /* Slight text shadow for readability */
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+  /* Slight text shadow for readability */
 }
 
 button:hover {
@@ -139,12 +150,14 @@ button:hover {
 }
 
 .logout-btn {
-  background: #ef5350; /* Red for logout */
+  background: #ef5350;
+  /* Red for logout */
   width: auto;
   padding: 8px 16px;
   margin: 0;
   font-size: 0.9rem;
 }
+
 .logout-btn:hover {
   background: #d32f2f;
 }
@@ -155,8 +168,11 @@ table {
   border-collapse: collapse;
   margin-top: 20px;
   background: white;
-  overflow: hidden;
   border-radius: 8px;
+  overflow: hidden;
+  /* clip corners */
+  table-layout: fixed;
+  /* Fixed layout for better control */
 }
 
 thead {
@@ -164,28 +180,123 @@ thead {
   color: white;
 }
 
-th, td {
-  padding: 15px;
+th,
+td {
+  padding: 10px;
+  /* Reduced padding for compactness */
   text-align: left;
   border-bottom: 1px solid #eee;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  /* Prevent wrapping */
 }
+
+/* Specific column widths */
+th:nth-child(1),
+td:nth-child(1) {
+  width: 50px;
+}
+
+/* # */
+th:nth-child(2),
+td:nth-child(2) {
+  width: 120px;
+}
+
+/* Short ID */
+/* Original URL gets the rest */
+th:nth-child(4),
+td:nth-child(4) {
+  width: 80px;
+  text-align: center;
+}
+
+/* Visit */
 
 th {
   text-transform: uppercase;
-  font-size: 0.85rem;
+  font-size: 0.8rem;
   letter-spacing: 0.05em;
 }
 
 tr:hover {
-  background-color: #f1f8e9; /* Light green hover */
+  background-color: #f1f8e9;
+  /* Light green hover */
 }
 
 /* Short URL Link */
 td a {
   color: #00796b;
+  font-weight: bold;
 }
 
-/* Responsive */
+/* Visit Button in Table */
+td a.visit-btn {
+  background-color: #1f4037;
+  color: white;
+  padding: 5px 10px;
+  border-radius: 4px;
+  font-size: 0.85rem;
+  text-decoration: none;
+}
+
+td a.visit-btn:hover {
+  background-color: #00796b;
+}
+
+/* Responsive - Switch to Card View on Mobile */
+@media (max-width: 768px) {
+
+  /* Hide the table header */
+  thead {
+    display: none;
+  }
+
+  table,
+  tbody,
+  tr,
+  td {
+    display: block;
+    width: 100%;
+  }
+
+  tr {
+    margin-bottom: 15px;
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    border: 1px solid #eee;
+  }
+
+  td {
+    text-align: right;
+    padding-left: 50%;
+    /* Make space for label */
+    position: relative;
+    white-space: normal;
+    /* Allow wrapping in card mode */
+    word-break: break-all;
+    border-bottom: 1px solid #f9f9f9;
+  }
+
+  td::before {
+    content: attr(data-label);
+    position: absolute;
+    left: 10px;
+    width: 45%;
+    text-align: left;
+    font-weight: bold;
+    color: #555;
+  }
+
+  /* Specific tweaks for URL cell in card view */
+  td:nth-child(3) {
+    max-width: 100%;
+    /* Reset width limit */
+  }
+}
+
 @media (max-width: 600px) {
   .container {
     padding: 20px;
