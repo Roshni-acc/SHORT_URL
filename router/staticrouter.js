@@ -9,6 +9,7 @@ router.get("/",restrictTo(['NORMAL']) ,  async(req,res)=>{
     return res.render("home",{
         urls: AllURL,
     })
+    
 })
 
 
