@@ -11,8 +11,6 @@ router.get("/",restrictTo(['NORMAL']) ,  async(req,res)=>{
     })
     
 })
-
-
 router.get("/signup",(req,res)=>{
     return res.render("signup");
 });
