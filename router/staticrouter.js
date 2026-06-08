@@ -9,7 +9,6 @@ router.get("/",restrictTo(['NORMAL']) ,  async(req,res)=>{
     return res.render("home",{
         urls: AllURL,
     })
-    
 })
 router.get("/signup",(req,res)=>{
     return res.render("signup");
